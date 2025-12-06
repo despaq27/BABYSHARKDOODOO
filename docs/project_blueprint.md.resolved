@@ -1,0 +1,62 @@
+# Project Blueprint: RETITLED
+
+## 1. Brand Identity
+**Name**: **RETITLED**
+**Concept**: Re-naming, re-defining, and re-claiming fashion. "Retitle your look."
+**Vibe**: **"Editorial Industrial"**
+*   **Aesthetic**: Raw but polished. Think exposed code, typewriter fonts (Courier/Mono), strikethrough text effects, and high-contrast visuals.
+*   **Color Palette**: Off-Black (`#111111`), Paper White (`#F5F5F5`), "Error" Red (Accent), and Safety Orange (Highlights).
+*   **Psychology**: It sounds established, exclusive, and intellectual. It fits the "Fluid" narrative perfectly—you are rewriting the title of who the clothing is for.
+
+---
+
+## 2. Distinguishing Features (The "Wow" Factor)
+
+### A. The "Re-Fit" Switch (Formerly 'Boyfriend Switch')
+*   **Description**: A toggle on every product page labeled **[Standard] / [Retitled]**.
+*   **Interaction**: Flipping the switch triggers a liquid morph transition.
+    *   *[Standard]* shows the item fit to size (traditional femme styling).
+    *   *[Retitled]* shows the *same* item oversized, layered, or styled on a different body type/gender presentation.
+*   **Tech**: React state controlling Framer Motion `layoutId` transitions.
+
+### B. "The Index" (Visual Search)
+*   **Description**: A chaotic, masonry-style "mood board" that replaces the homepage.
+*   **Interaction**: Users don't search for "Pants". They click on *textures* (Concrete, Silk, Rain). The grid reshuffles instantly to match that mood.
+*   **Tech**: Client-side filtering with heavy use of `animate-shared-layout`.
+
+### C. "Motion-First" Grid
+*   **Description**: No static images on the PLP (Product Listing Page).
+*   **Interaction**: Every grid item is a 9:16 video loop. Hovering enters "Scrub Mode" where moving the mouse Left/Right scrubs through the video timeline to check fabric movement.
+
+---
+
+## 3. Marketing Strategy: "Rewrite the Narrative"
+
+### Go-to-Market Strategy: "Visual Storytelling"
+*   **Campaign**: **"Title: Untitled"**
+    *   Launch teaser showing models ripping labels off clothes and stamping "RETITLED" over them.
+*   **Content Pillars**:
+    1.  **Behind the Seams**: Raw, unedited footage of the design process. Highlighting the "Ultra High Quality".
+    2.  **The Fluid Test**: Side-by-side videos of the same item on a 5'2" femme model and a 6'1" mascot/male model. Caption: "Fits everyone. Titles irrelevant."
+
+### "Fluid Fashion" Angle
+*   Market the clothing not as "Unisex" (which sounds boring/shapeless) but as **"Universal Structure"**.
+*   Use "Architecture" terminology instead of fashion terms (e.g., "Structural fit" vs "Baggy").
+
+---
+
+## 4. Technical Architecture
+
+### The Stack (Modern & High-Performance)
+*   **Framework**: [Next.js 14 (App Router)](https://nextjs.org/) - For SEO and React Server Components.
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/) - For rapid, custom design implementation.
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/) - Critical for the "liquid" transitions.
+*   **Backend/DB**: [Supabase](https://supabase.com/) - PostgreSQL database for inventory and auth.
+*   **Image/Video**: [Cloudinary](https://cloudinary.com/) or Vercel Blob - For optimizing the heavy video content.
+*   **State**: [Zustand](https://github.com/pmndrs/zustand) - Distinct from Redux, simpler for UI state.
+
+### Phase 1: MVP (Landing Page + Product Demo)
+We will build the **Landing Page** with the "Index" feature and **One Product Detail Page** demonstrating the "Re-Fit" switch.
+
+---
+**Status**: Awaiting User Approval to Initialize Codebase.

@@ -1,0 +1,20 @@
+# Feature Concept: Democratic Drops (The "Open Source" Design)
+
+**Core Idea**: Decentralize the creative direction. Turn the customer base into the design team.
+
+## 1. "Vote to Drop" System
+*   **Mechanism**: Before manufacturing (using the Hybrid Sourcing model), digital mockups of potential items are uploaded to "The Index".
+*   **Action**: Users vote with a "Cop or Drop" mechanic.
+*   **Threshold**: Only items that reach a certain vote threshold (e.g., 500 upvotes) get sent to Apliiq/Trendsi for production.
+*   **Benefit**: Zero inventory risk. We only sell what people explicitly say they want.
+
+## 2. "Guest Designer" Protocol (User Submissions)
+*   **Submission**: Users email high-res art/designs to `design@retitled.com`.
+*   **Curation**: Internal team selects the top 5 submissions each month.
+*   **The Voting Phase**: These 5 designs go head-to-head in a public vote on the site.
+*   **Reward**: The winner gets their design produced as limited edition "RETITLED x [Artist]" merch and receives a % of profit or free gear.
+
+## 3. Implementation Notes (Future V2)
+*   Need a new database table for `votes`.
+*   Need an image upload portal (eventually replacing email).
+*   "Leaderboard" UI component for the most popular upcoming drops.

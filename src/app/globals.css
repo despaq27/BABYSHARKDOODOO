@@ -1,26 +1,227 @@
 @import "tailwindcss";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+/* ═══════════════════════════════════════════════════════════
+   RETITLED Design System - "Editorial Industrial"
+   ═══════════════════════════════════════════════════════════ */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core Palette */
+  --off-black: #111111;
+  --paper: #F5F5F5;
+  --error-red: #FF3B30;
+  --safety-orange: #FF9500;
+
+  /* Semantic Colors */
+  --background: var(--paper);
+  --foreground: var(--off-black);
+  --accent: var(--error-red);
+  --highlight: var(--safety-orange);
+
+  /* Typography */
+  --font-display: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+}
+
+/* Dark Theme (Men's Page) */
+[data-theme="dark"] {
+  --background: #0A0A0A;
+  --foreground: #E5E5E5;
+  --accent: #3B82F6;
+  --highlight: #8B5CF6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-highlight: var(--highlight);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ═══════════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════════ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Typography
+   ═══════════════════════════════════════════════════════════ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(3rem, 10vw, 8rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Selection & Cursor
+   ═══════════════════════════════════════════════════════════ */
+
+::selection {
+  background: var(--off-black);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--ease-out-expo);
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Utility Classes
+   ═══════════════════════════════════════════════════════════ */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-highlight {
+  color: var(--highlight);
+}
+
+/* Strikethrough Effect (Brand Element) */
+.strikethrough {
+  position: relative;
+  display: inline-block;
+}
+
+.strikethrough::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  background: var(--accent);
+  transform: rotate(-2deg);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Button Styles
+   ═══════════════════════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.btn-primary {
+  background: var(--off-black);
+  color: var(--paper);
+  border-color: var(--off-black);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--off-black);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--off-black);
+}
+
+.btn-outline:hover {
+  background: var(--off-black);
+  color: var(--paper);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Scroll Utilities
+   ═══════════════════════════════════════════════════════════ */
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
 }

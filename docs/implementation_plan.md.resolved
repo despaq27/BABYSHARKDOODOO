@@ -1,0 +1,98 @@
+# Implementation Plan: RETITLED Landing Page MVP
+
+Build the initial "Ultra High Quality" landing page with the signature "Editorial Industrial" aesthetic.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Design Decisions Needed** - Please answer these before I proceed:
+
+1. **Hero Animation Style**: Which first-impression effect do you prefer?
+   - **A) "Glitch Reveal"**: Text scrambles/glitches before resolving to "RETITLED"
+   - **B) "Typewriter"**: Characters type in one-by-one with cursor blink
+   - **C) "Fade + Scale"**: Clean, premium fade-in with subtle scale animation
+
+2. **The Index Grid Layout**: For the mood board homepage:
+   - **A) Pinterest-style Masonry** (organic, varied heights)
+   - **B) Bento Grid** (structured, mixed sizes like Apple's marketing)
+   - **C) Horizontal Scroll** (editorial magazine feel)
+
+3. **Background Treatment**:
+   - **A) Pure White** (`#F5F5F5`) - Clean, gallery-like
+   - **B) Pure Black** (`#111111`) - High contrast, dramatic
+   - **C) Noise/Grain Texture** - Raw, film-like aesthetic
+
+4. **Do you have any product images/videos ready?** If not, I'll use placeholder content that matches the vibe.
+
+---
+
+## Proposed Changes
+
+### Project Initialization
+
+#### [NEW] Next.js 14 Project (`c:\Users\desmond\Desktop\retitle`)
+- Initialize with App Router, TypeScript, Tailwind CSS, ESLint
+- Install: `framer-motion`, `zustand`, `@fontsource/jetbrains-mono` (monospace font)
+
+---
+
+### Design System
+
+#### [NEW] [tailwind.config.ts](file:///c:/Users/desmond/Desktop/retitle/tailwind.config.ts)
+Custom Tailwind configuration with RETITLED brand tokens:
+- Colors: `off-black`, `paper`, `error-red`, `safety-orange`
+- Fonts: `JetBrains Mono` (headings), `Inter` (body)
+- Custom animations: `glitch`, `reveal`, `grain`
+
+#### [NEW] [src/styles/globals.css](file:///c:/Users/desmond/Desktop/retitle/src/styles/globals.css)
+Global styles with:
+- CSS reset and base typography
+- Grain/noise overlay effect
+- Custom cursor styles
+
+---
+
+### Components
+
+#### [NEW] [src/components/ui/AnimatedText.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/ui/AnimatedText.tsx)
+Reusable text animation component using Framer Motion for the hero typography.
+
+#### [NEW] [src/components/layout/Header.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/layout/Header.tsx)
+Minimal header with "RETITLED" wordmark and navigation placeholder.
+
+#### [NEW] [src/components/home/HeroSection.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/home/HeroSection.tsx)
+Full-viewport hero with:
+- Animated headline
+- Tagline ("Retitle your look.")
+- CTA button with hover effect
+
+#### [NEW] [src/components/home/IndexGrid.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/home/IndexGrid.tsx)
+The signature mood board grid with:
+- Masonry/Bento layout (based on your choice)
+- Hover effects showing category labels
+- Placeholder images/videos
+
+---
+
+### Pages
+
+#### [NEW] [src/app/page.tsx](file:///c:/Users/desmond/Desktop/retitle/src/app/page.tsx)
+Landing page composing `HeroSection` and `IndexGrid`.
+
+#### [NEW] [src/app/layout.tsx](file:///c:/Users/desmond/Desktop/retitle/src/app/layout.tsx)
+Root layout with font imports and global providers.
+
+---
+
+## Verification Plan
+
+### Automated
+- **Build Check**: `npm run build` - Ensures no TypeScript/ESLint errors
+- **Dev Server**: `npm run dev` - Launches at `http://localhost:3000`
+
+### Manual (User Testing)
+1. Open `http://localhost:3000` in browser
+2. Verify hero animation plays smoothly on load
+3. Test hover effects on grid items
+4. Resize browser to check mobile/tablet responsiveness
+5. Confirm typography renders with `JetBrains Mono` font

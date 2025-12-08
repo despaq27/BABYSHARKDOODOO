@@ -1,0 +1,65 @@
+# Hype-Stream Infinite Scroll Implementation Plan
+
+## Goal Description
+Implement a TikTok-style "vertical deck" infinite scroll shopping experience. This feature, "Scroll to Shop," will serve as a high-engagement interface blending product discovery (Type A), brand vibe (Type B), and visual art (Type C). It focuses on gesture-based interactions (swipe to cart, double-tap to heart) and gamification to increase user dwell time.
+
+## User Review Required
+- **Dependencies**: I plan to use `framer-motion` (already in package.json) for all animations. If complex gestures (like hold-to-pause vs tap) become tricky, I might need to add `react-use-gesture`, but I'll start without it.
+- **Assets**: I will use placeholder images/videos unless specific assets are provided. The plan assumes "mock" content for now.
+
+## Proposed Changes
+
+### New Components
+
+#### [NEW] [page.tsx](file:///c:/Users/desmond/Desktop/retitle/src/app/scroll-to-shop/page.tsx)
+- The main entry point for the "Scroll to Shop" feature.
+- Sets up the full-screen layout and hides typical navigation elements if necessary for immersion.
+
+#### [NEW] [HypeFeed.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/feed/HypeFeed.tsx)
+- The core container managing the vertical snap mechanics.
+- Handles the "virtual" stack of cards to ensure performance (only rendering current, prev, next).
+- Manages global feed state (active index).
+
+#### [NEW] [FeedCard.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/feed/FeedCard.tsx)
+- A polymorphic component that renders the specific card type based on data.
+- Handles common gestures:
+    - **Swipe Right**: Add to cart.
+    - **Double Tap**: Wishlist/Heart.
+    - **Long Press**: Quick Look overlay.
+
+#### [NEW] [ProductCard.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/feed/cards/ProductCard.tsx)
+- Type A content: Looping video of product, pricing overlay, "Shop Now" subtle CTA.
+
+#### [NEW] [VibeCard.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/feed/cards/VibeCard.tsx)
+- Type B content: UGC style, grainy filters, focus on aesthetic/social proof.
+
+#### [NEW] [TripCard.tsx](file:///c:/Users/desmond/Desktop/retitle/src/components/feed/cards/TripCard.tsx)
+- Type C content: AI art/abstract visuals.
+- Might include the "Remix" button logic here.
+
+#### [NEW] [FeedStore.ts](file:///c:/Users/desmond/Desktop/retitle/src/store/feedStore.ts)
+- Zustand store to manage:
+    - `currentIndex`: Which card is active.
+    - `wishlist`: Array of liked item IDs.
+    - `cart`: Array of cart item IDs.
+    - `isMuted`: Audio state.
+
+### Modified Files
+- None expected to be heavily modified, as this is a new standalone page, but I might lightly touch `globals.css` if global scroll behavior needs tweaking for this specific route.
+
+## Verification Plan
+
+### Manual Verification
+1.  **Route Navigation**: Verify accessing `/scroll-to-shop` loads the full-screen interface.
+2.  **Scroll Interaction**:
+    - Scroll down -> Snaps to next card.
+    - Scroll up -> Snaps to previous card.
+    - Verify infinite illusion (looping data or sufficiently long list).
+3.  **Gestures**:
+    - **Swipe Right**: Verify "Added to Cart" toast/vibration feedback (visual).
+    - **Double Tap**: Verify Heart animation appears and item is added to wishlist state.
+    - **Long Press**: Verify video pauses and "Quick Look" details appear.
+4.  **Content Variety**:
+    - Scroll through at least 10 items to verify the pattern (A, B, C mix) appears correct.
+5.  **Responsiveness**:
+    - Test mobile view (chrome dev tools) to ensure touch targets are thumb-friendly.

@@ -1,0 +1,94 @@
+<!-- Cart Drawer -->
+<div id="cart-drawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-zinc-900 z-[100] transform translate-x-full transition-transform duration-300 ease-in-out">
+  <div class="h-full flex flex-col">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-zinc-800">
+      <h2 class="text-xl font-black uppercase tracking-wider text-white">YOUR BAG</h2>
+      <button id="close-cart" class="text-zinc-400 hover:text-white transition-colors text-2xl">×</button>
+    </div>
+
+    <!-- Items -->
+    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+      {% for item in cart.items %}
+        <div class="flex gap-4 bg-zinc-800/50 p-4 rounded-lg cart-item" data-line="{{ forloop.index }}">
+          {% if item.image %}
+            <img src="{{ item.image | image_url: width: 100 }}" alt="{{ item.title }}" class="w-20 h-20 object-cover rounded">
+          {% endif %}
+          <div class="flex-1">
+            <h3 class="font-bold text-white uppercase text-sm">{{ item.product.title }}</h3>
+            <p class="text-zinc-400 text-xs">{{ item.variant.title }}</p>
+            <p class="text-green-400 font-mono mt-1">{{ item.line_price | money }}</p>
+          </div>
+          <button class="remove-item text-zinc-500 hover:text-red-400 transition-colors" data-line="{{ forloop.index }}">
+            🗑️
+          </button>
+        </div>
+      {% else %}
+        <p class="text-zinc-500 text-center py-12">Your bag is empty</p>
+      {% endfor %}
+    </div>
+
+    <!-- Footer -->
+    <div class="p-6 border-t border-zinc-800 space-y-4">
+      <div class="flex justify-between text-lg">
+        <span class="text-zinc-400">SUBTOTAL</span>
+        <span id="cart-total" class="font-mono text-white font-bold">{{ cart.total_price | money }}</span>
+      </div>
+      <a href="/checkout" class="block w-full bg-white text-black py-4 font-black uppercase tracking-wider text-center hover:bg-green-400 transition-colors">
+        CHECKOUT
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div id="cart-overlay" class="fixed inset-0 bg-black/50 z-[99] hidden"></div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const drawer = document.getElementById('cart-drawer');
+    const overlay = document.getElementById('cart-overlay');
+    const closeCart = document.getElementById('close-cart');
+    const cartToggle = document.getElementById('cart-toggle');
+
+    function openCart() {
+      drawer.classList.remove('translate-x-full');
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCartDrawer() {
+      drawer.classList.add('translate-x-full');
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    if (cartToggle) cartToggle.addEventListener('click', openCart);
+    if (closeCart) closeCart.addEventListener('click', closeCartDrawer);
+    if (overlay) overlay.addEventListener('click', closeCartDrawer);
+
+    // Remove item
+    document.querySelectorAll('.remove-item').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const line = e.target.dataset.line;
+        try {
+          await fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ line: parseInt(line), quantity: 0 })
+          });
+          location.reload();
+        } catch (error) {
+          console.error('Error removing item:', error);
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": []
+}
+{% endschema %}

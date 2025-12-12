@@ -1,0 +1,72 @@
+<!-- Hero Section - Matching Original Next.js Design -->
+<section class="hero">
+  <!-- Background Image -->
+  <div class="hero__background">
+    <img 
+      id="heroImage"
+      src="{{ section.settings.background_image | img_url: 'master' | default: 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=1920' }}"
+      alt="Hero Background"
+      style="opacity: 0.4;"
+    >
+    <div class="hero__gradient"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="hero__content">
+    <!-- Tagline - Default to Studio -->
+    <p id="heroTagline" class="hero__tagline">
+      Studio. Collection.
+    </p>
+
+    <!-- Main Title -->
+    <h1 id="heroTitle" class="hero__title">
+      {{ section.settings.heading | default: 'RETITLED' }}
+    </h1>
+
+    <!-- Subtitle - Default to Studio -->
+    <p id="heroSubtitle" class="hero__subtitle">
+      Essential fits. Elevated basics. The new standard for your rotation.
+    </p>
+
+    <!-- Buttons - Default to Studio -->
+    <div id="heroButtons" class="hero__buttons">
+      <a id="heroShopBtn" href="/collections/studio" class="btn btn-primary">
+        Shop Collection
+      </a>
+      <a href="/pages/lookbook" class="btn btn-outline">
+        View Lookbook
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div id="scrollIndicator" class="hero__scroll-indicator">
+    <div class="scroll-mouse">
+      <div class="scroll-mouse__wheel"></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "RETITLED"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

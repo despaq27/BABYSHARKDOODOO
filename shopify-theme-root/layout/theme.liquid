@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ shop.name }} | {% if template.name == 'index' %}Retitle Your Look{% else %}{{ page_title }}{% endif %}</title>
+  
+  <!-- Google Fonts - Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Street: JetBrains Mono (headers) + Inter (body) -->
+  <!-- Studio: Syne (headers) + Manrope (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Manrope:wght@300;400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Theme CSS -->
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  
+  {{ content_for_header }}
+  
+  <style>
+    /* Inline critical styles */
+    html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }
+    .page-wrapper { min-height: 100vh; }
+  </style>
+</head>
+<body class="font-body antialiased studio-theme">
+  <!-- Noise Texture Overlay -->
+  <div class="noise-overlay"></div>
+  
+  <!-- Animated Gradient Background -->
+  <div class="gradient-bg"></div>
+
+  <!-- Street Loader (triggered on first switch to Street) -->
+  {% section 'street-loader' %}
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle" id="themeToggle">
+    <button class="theme-toggle__btn theme-toggle__btn--active" data-theme="light" onclick="setTheme('light')">Studio</button>
+    <button class="theme-toggle__btn" data-theme="dark" onclick="setTheme('dark')">Street</button>
+  </div>
+
+  <div class="page-wrapper">
+    {{ content_for_layout }}
+  </div>
+  
+  {% section 'cart-drawer' %}
+
+  <script>
+    // Theme Toggle with Street Loader on first switch
+    function setTheme(theme, skipLoader) {
+      const previousTheme = document.documentElement.dataset.theme;
+      
+      // Show street loader on FIRST switch from Studio to Street
+      if (theme === 'dark' && previousTheme === 'light' && !skipLoader) {
+        if (typeof showStreetLoader === 'function') {
+          showStreetLoader();
+        }
+      }
+      
+      document.documentElement.dataset.theme = theme;
+      document.querySelectorAll('.theme-toggle__btn').forEach(btn => {
+        btn.classList.toggle('theme-toggle__btn--active', btn.dataset.theme === theme);
+      });
+      
+      // Save preference and mark that user has interacted
+      if (!skipLoader) {
+        sessionStorage.setItem('theme-user-switched', 'true');
+      }
+      localStorage.setItem('retitled-theme', theme);
+      
+      // Update hero content based on theme
+      const tagline = document.getElementById('heroTagline');
+      const subtitle = document.getElementById('heroSubtitle');
+      const shopBtn = document.getElementById('heroShopBtn');
+      const heroImage = document.getElementById('heroImage');
+      
+      if (theme === 'light') {
+        if (tagline) tagline.textContent = 'Studio. Collection.';
+        if (subtitle) subtitle.textContent = 'Essential fits. Elevated basics. The new standard for your rotation.';
+        if (shopBtn) { shopBtn.textContent = 'Shop Collection'; shopBtn.href = '/collections/studio'; }
+        if (heroImage) heroImage.style.opacity = '0.4';
+        document.body.classList.add('studio-theme');
+        document.body.classList.remove('street-theme');
+      } else {
+        if (tagline) tagline.textContent = 'Street. Division.';
+        if (subtitle) subtitle.textContent = 'Heavyweight cottons. Industrial cuts. Built for the concrete.';
+        if (shopBtn) { shopBtn.textContent = 'Shop Street'; shopBtn.href = '/collections/street'; }
+        if (heroImage) heroImage.style.opacity = '0.2';
+        document.body.classList.add('street-theme');
+        document.body.classList.remove('studio-theme');
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Force Studio (light) on first visit - ignore old cached preference
+      // Only use saved theme if user has explicitly interacted this session
+      let savedTheme = 'light'; // Always default to Studio
+      
+      if (sessionStorage.getItem('theme-user-switched')) {
+        // User has switched themes this session, respect their choice
+        savedTheme = localStorage.getItem('retitled-theme') || 'light';
+      }
+      
+      // Apply theme without showing loader on initial load
+      setTheme(savedTheme, true);
+      
+      // Animate hero elements
+      const heroTitle = document.getElementById('heroTitle');
+      const heroTagline = document.getElementById('heroTagline');
+      const heroSubtitle = document.getElementById('heroSubtitle');
+      const heroButtons = document.getElementById('heroButtons');
+      const scrollIndicator = document.getElementById('scrollIndicator');
+
+      if (heroTitle) {
+        heroTitle.style.opacity = '0';
+        heroTitle.style.transform = 'translateY(50px)';
+        setTimeout(() => {
+          heroTitle.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+          heroTitle.style.opacity = '1';
+          heroTitle.style.transform = 'translateY(0)';
+        }, 100);
+      }
+
+      if (heroTagline) {
+        heroTagline.style.opacity = '0';
+        heroTagline.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          heroTagline.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+          heroTagline.style.opacity = '0.8';
+          heroTagline.style.transform = 'translateY(0)';
+        }, 500);
+      }
+
+      if (heroSubtitle) {
+        heroSubtitle.style.opacity = '0';
+        heroSubtitle.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          heroSubtitle.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+          heroSubtitle.style.opacity = '0.8';
+          heroSubtitle.style.transform = 'translateY(0)';
+        }, 800);
+      }
+
+      if (heroButtons) {
+        heroButtons.style.opacity = '0';
+        heroButtons.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          heroButtons.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+          heroButtons.style.opacity = '1';
+          heroButtons.style.transform = 'translateY(0)';
+        }, 1000);
+      }
+
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = '0';
+        setTimeout(() => {
+          scrollIndicator.style.transition = 'all 0.6s ease';
+          scrollIndicator.style.opacity = '1';
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+</html>

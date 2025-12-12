@@ -1,0 +1,762 @@
+<!-- Studio Lookbook Page - Boutique Aesthetic -->
+<div class="studio-lookbook">
+  <!-- Hero Section -->
+  <header class="lookbook-hero">
+    <div class="lookbook-hero__content">
+      <span class="lookbook-hero__season">Season 01 — Studio</span>
+      <h1 class="lookbook-hero__title">LOOKBOOK</h1>
+      <p class="lookbook-hero__subtitle">Elevated essentials for the modern woman. Shot on location in Los Angeles.</p>
+    </div>
+    <div class="lookbook-hero__scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="lookbook-hero__arrow">↓</div>
+    </div>
+  </header>
+
+  <!-- Introduction -->
+  <section class="lookbook-intro">
+    <div class="lookbook-intro__container">
+      <div class="lookbook-intro__text">
+        <h2 class="lookbook-intro__heading">The Studio Edit</h2>
+        <p class="lookbook-intro__description">
+          Soft silhouettes meet refined details. Our Studio collection is designed for moments 
+          that matter—from golden hour coffee runs to late-night gallery openings. Each piece 
+          is crafted to become part of your story.
+        </p>
+      </div>
+      <div class="lookbook-intro__stats">
+        <div class="lookbook-stat">
+          <span class="lookbook-stat__number">12</span>
+          <span class="lookbook-stat__label">Pieces</span>
+        </div>
+        <div class="lookbook-stat">
+          <span class="lookbook-stat__number">4</span>
+          <span class="lookbook-stat__label">Looks</span>
+        </div>
+        <div class="lookbook-stat">
+          <span class="lookbook-stat__number">1</span>
+          <span class="lookbook-stat__label">Vision</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Look 1 - Full Width Hero -->
+  <section class="lookbook-look lookbook-look--hero">
+    <div class="lookbook-look__image-container">
+      <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Look 01 - The Essentialist" class="lookbook-look__image">
+      <div class="lookbook-look__overlay"></div>
+    </div>
+    <div class="lookbook-look__content">
+      <span class="lookbook-look__number">01</span>
+      <h3 class="lookbook-look__title">The Essentialist</h3>
+      <p class="lookbook-look__description">Clean lines. Quiet confidence. A foundation for everything.</p>
+      <a href="/collections/studio" class="lookbook-look__cta">Shop This Look →</a>
+    </div>
+  </section>
+
+  <!-- Masonry Grid Section -->
+  <section class="lookbook-grid">
+    <div class="lookbook-grid__container">
+      <!-- Row 1 -->
+      <div class="lookbook-grid__item lookbook-grid__item--tall">
+        <img src="{{ 'studio_v2_1_night_out_flash_1765015704274.png' | asset_url }}" alt="Look 02" class="lookbook-grid__image">
+        <div class="lookbook-grid__overlay">
+          <span class="lookbook-grid__number">02</span>
+          <h4 class="lookbook-grid__title">Night Out</h4>
+          <p class="lookbook-grid__caption">Flash photography • Y2K vibes</p>
+        </div>
+      </div>
+      
+      <div class="lookbook-grid__item">
+        <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Detail Shot" class="lookbook-grid__image">
+        <div class="lookbook-grid__overlay">
+          <span class="lookbook-grid__tag">Detail</span>
+        </div>
+      </div>
+      
+      <div class="lookbook-grid__item">
+        <img src="{{ 'studio_v2_2_park_cozy_1765015718679.png' | asset_url }}" alt="Look 03" class="lookbook-grid__image">
+        <div class="lookbook-grid__overlay">
+          <span class="lookbook-grid__number">03</span>
+          <h4 class="lookbook-grid__title">Golden Hour</h4>
+          <p class="lookbook-grid__caption">Soft girl aesthetic</p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="lookbook-grid__item lookbook-grid__item--wide">
+        <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Look 04" class="lookbook-grid__image">
+        <div class="lookbook-grid__overlay">
+          <span class="lookbook-grid__number">04</span>
+          <h4 class="lookbook-grid__title">Main Character</h4>
+          <p class="lookbook-grid__caption">When you know you're that girl</p>
+        </div>
+      </div>
+      
+      <div class="lookbook-grid__item lookbook-grid__item--tall">
+        <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Look 05" class="lookbook-grid__image">
+        <div class="lookbook-grid__overlay">
+          <span class="lookbook-grid__number">05</span>
+          <h4 class="lookbook-grid__title">Daydreamer</h4>
+          <p class="lookbook-grid__caption">Lost in the moment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section class="lookbook-quote">
+    <blockquote class="lookbook-quote__text">
+      "Style is a way to say who you are without having to speak."
+    </blockquote>
+    <cite class="lookbook-quote__author">— Rachel Zoe</cite>
+  </section>
+
+  <!-- Product Feature Strip -->
+  <section class="lookbook-products">
+    <h3 class="lookbook-products__heading">Featured Pieces</h3>
+    <div class="lookbook-products__grid">
+      {% for product in collections.studio.products limit: 4 %}
+        <a href="{{ product.url }}" class="lookbook-product">
+          <div class="lookbook-product__image-container">
+            {% if product.featured_image %}
+              <img src="{{ product.featured_image | img_url: '400x500', crop: 'center' }}" alt="{{ product.title }}" class="lookbook-product__image">
+            {% else %}
+              <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="{{ product.title }}" class="lookbook-product__image">
+            {% endif %}
+          </div>
+          <div class="lookbook-product__info">
+            <h4 class="lookbook-product__name">{{ product.title }}</h4>
+            <span class="lookbook-product__price">{{ product.price | money }}</span>
+          </div>
+        </a>
+      {% else %}
+        <!-- Fallback when no products -->
+        <div class="lookbook-product lookbook-product--placeholder">
+          <div class="lookbook-product__image-container">
+            <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Coming Soon" class="lookbook-product__image">
+          </div>
+          <div class="lookbook-product__info">
+            <h4 class="lookbook-product__name">Coming Soon</h4>
+            <span class="lookbook-product__price">—</span>
+          </div>
+        </div>
+        <div class="lookbook-product lookbook-product--placeholder">
+          <div class="lookbook-product__image-container">
+            <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Coming Soon" class="lookbook-product__image">
+          </div>
+          <div class="lookbook-product__info">
+            <h4 class="lookbook-product__name">Coming Soon</h4>
+            <span class="lookbook-product__price">—</span>
+          </div>
+        </div>
+        <div class="lookbook-product lookbook-product--placeholder">
+          <div class="lookbook-product__image-container">
+            <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Coming Soon" class="lookbook-product__image">
+          </div>
+          <div class="lookbook-product__info">
+            <h4 class="lookbook-product__name">Coming Soon</h4>
+            <span class="lookbook-product__price">—</span>
+          </div>
+        </div>
+        <div class="lookbook-product lookbook-product--placeholder">
+          <div class="lookbook-product__image-container">
+            <img src="{{ 'studio-lookbook-placeholder.png' | asset_url }}" alt="Coming Soon" class="lookbook-product__image">
+          </div>
+          <div class="lookbook-product__info">
+            <h4 class="lookbook-product__name">Coming Soon</h4>
+            <span class="lookbook-product__price">—</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="lookbook-cta">
+    <div class="lookbook-cta__content">
+      <h2 class="lookbook-cta__heading">Ready to Retitle Your Look?</h2>
+      <p class="lookbook-cta__text">Discover the complete Studio collection and find pieces that tell your story.</p>
+      <div class="lookbook-cta__buttons">
+        <a href="/collections/studio" class="btn btn-primary">Shop Studio Collection</a>
+        <a href="/pages/street-lookbook" class="btn btn-outline">View Street Lookbook →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Navigation -->
+  <nav class="lookbook-nav">
+    <a href="/" class="lookbook-nav__link">← Back to Home</a>
+    <a href="/pages/street-lookbook" class="lookbook-nav__link">Street Lookbook →</a>
+  </nav>
+</div>
+
+<style>
+  /* ============================================
+     STUDIO LOOKBOOK STYLES
+     Boutique aesthetic with soft, feminine touches
+     ============================================ */
+
+  .studio-lookbook {
+    background: #FAFAFA;
+    color: #1A1A1A;
+    font-family: 'Manrope', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Hero Section */
+  .lookbook-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    background: linear-gradient(180deg, #FAFAFA 0%, #F5F0EB 100%);
+  }
+
+  .lookbook-hero__content {
+    max-width: 800px;
+  }
+
+  .lookbook-hero__season {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: #E91E63;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #E91E63;
+    border-radius: 100px;
+  }
+
+  .lookbook-hero__title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, #1A1A1A 0%, #555 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .lookbook-hero__subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .lookbook-hero__scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #999;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  .lookbook-hero__arrow {
+    font-size: 1.25rem;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  /* Introduction Section */
+  .lookbook-intro {
+    padding: 8rem 2rem;
+    background: #fff;
+  }
+
+  .lookbook-intro__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .lookbook-intro__heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1A1A1A;
+  }
+
+  .lookbook-intro__description {
+    font-size: 1.125rem;
+    line-height: 1.9;
+    color: #555;
+  }
+
+  .lookbook-intro__stats {
+    display: flex;
+    gap: 3rem;
+    justify-content: flex-end;
+  }
+
+  .lookbook-stat {
+    text-align: center;
+  }
+
+  .lookbook-stat__number {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E91E63;
+    line-height: 1;
+  }
+
+  .lookbook-stat__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #999;
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  /* Full Width Look Section */
+  .lookbook-look--hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+  }
+
+  .lookbook-look__image-container {
+    position: absolute;
+    inset: 0;
+  }
+
+  .lookbook-look__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lookbook-look__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(250,250,250,0.9) 0%, rgba(250,250,250,0.3) 50%, transparent 100%);
+  }
+
+  .lookbook-look__content {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 500px;
+    z-index: 10;
+  }
+
+  .lookbook-look__number {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #E91E63;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+
+  .lookbook-look__title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 1rem;
+  }
+
+  .lookbook-look__description {
+    font-size: 1.125rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .lookbook-look__cta {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #1A1A1A;
+    text-decoration: none;
+    padding-bottom: 0.25rem;
+    border-bottom: 2px solid #E91E63;
+    transition: all 0.3s ease;
+  }
+
+  .lookbook-look__cta:hover {
+    color: #E91E63;
+  }
+
+  /* Masonry Grid */
+  .lookbook-grid {
+    padding: 4rem 2rem;
+    background: #FAFAFA;
+  }
+
+  .lookbook-grid__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .lookbook-grid__item {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #f0f0f0;
+    cursor: pointer;
+  }
+
+  .lookbook-grid__item--tall {
+    grid-row: span 2;
+  }
+
+  .lookbook-grid__item--wide {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+
+  .lookbook-grid__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .lookbook-grid__item:hover .lookbook-grid__image {
+    transform: scale(1.05);
+  }
+
+  .lookbook-grid__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .lookbook-grid__item:hover .lookbook-grid__overlay {
+    opacity: 1;
+  }
+
+  .lookbook-grid__number {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #E91E63;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+  }
+
+  .lookbook-grid__title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .lookbook-grid__caption {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .lookbook-grid__tag {
+    display: inline-block;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #fff;
+    background: rgba(233, 30, 99, 0.8);
+    padding: 0.375rem 0.75rem;
+    border-radius: 100px;
+  }
+
+  /* Quote Section */
+  .lookbook-quote {
+    padding: 8rem 2rem;
+    text-align: center;
+    background: #fff;
+  }
+
+  .lookbook-quote__text {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 500;
+    font-style: italic;
+    color: #1A1A1A;
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
+  }
+
+  .lookbook-quote__author {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #999;
+  }
+
+  /* Products Section */
+  .lookbook-products {
+    padding: 6rem 2rem;
+    background: #F5F0EB;
+  }
+
+  .lookbook-products__heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    text-align: center;
+    color: #999;
+    margin-bottom: 3rem;
+  }
+
+  .lookbook-products__grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .lookbook-product {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .lookbook-product__image-container {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .lookbook-product__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .lookbook-product:hover .lookbook-product__image {
+    transform: scale(1.05);
+  }
+
+  .lookbook-product__info {
+    text-align: center;
+  }
+
+  .lookbook-product__name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #1A1A1A;
+  }
+
+  .lookbook-product__price {
+    font-size: 0.875rem;
+    color: #E91E63;
+  }
+
+  .lookbook-product--placeholder {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* CTA Section */
+  .lookbook-cta {
+    padding: 8rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, #FAFAFA 0%, #F5F0EB 100%);
+  }
+
+  .lookbook-cta__content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .lookbook-cta__heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1A1A1A;
+  }
+
+  .lookbook-cta__text {
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .lookbook-cta__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Footer Navigation */
+  .lookbook-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    background: #fff;
+    border-top: 1px solid #eee;
+  }
+
+  .lookbook-nav__link {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .lookbook-nav__link:hover {
+    color: #E91E63;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .lookbook-intro__container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .lookbook-intro__stats {
+      justify-content: flex-start;
+    }
+
+    .lookbook-grid__container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lookbook-grid__item--wide {
+      grid-column: span 2;
+    }
+
+    .lookbook-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lookbook-hero {
+      min-height: 80vh;
+    }
+
+    .lookbook-grid__container {
+      grid-template-columns: 1fr;
+    }
+
+    .lookbook-grid__item--tall,
+    .lookbook-grid__item--wide {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .lookbook-look__content {
+      left: 2rem;
+      right: 2rem;
+      max-width: none;
+    }
+
+    .lookbook-look__overlay {
+      background: linear-gradient(to top, rgba(250,250,250,0.95) 0%, rgba(250,250,250,0.5) 100%);
+    }
+
+    .lookbook-products__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .lookbook-cta__buttons {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for scroll animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Animate grid items
+    document.querySelectorAll('.lookbook-grid__item').forEach((item, index) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`;
+      observer.observe(item);
+    });
+
+    // Animate product items
+    document.querySelectorAll('.lookbook-product').forEach((item, index) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px)';
+      item.style.transition = `all 0.5s ease ${index * 0.1}s`;
+      observer.observe(item);
+    });
+  });
+</script>

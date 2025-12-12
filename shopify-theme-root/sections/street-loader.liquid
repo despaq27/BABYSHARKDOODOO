@@ -1,0 +1,273 @@
+<!-- Street Section Preloader with Smooth Running Animation -->
+<div id="streetLoader" class="street-loader street-loader--hidden">
+  <div class="street-loader__container">
+    <!-- Smooth Running Figure -->
+    <div class="street-loader__runner">
+      <div class="runner">
+        <!-- Simple stick figure with CSS-animated limbs -->
+        <div class="runner__body">
+          <div class="runner__head"></div>
+          <div class="runner__torso"></div>
+          <div class="runner__arm runner__arm--left"></div>
+          <div class="runner__arm runner__arm--right"></div>
+          <div class="runner__leg runner__leg--left"></div>
+          <div class="runner__leg runner__leg--right"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Loading Bar -->
+    <div class="street-loader__track">
+      <div class="street-loader__bar"></div>
+    </div>
+    
+    <!-- Loading Text -->
+    <div class="street-loader__text">
+      <span class="street-loader__brand">RETITLED</span>
+      <span class="street-loader__tagline">ENTERING STREET DIVISION</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .street-loader {
+    position: fixed;
+    inset: 0;
+    background: #0A0A0A;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  
+  .street-loader--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  .street-loader--active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .street-loader__container {
+    width: 300px;
+    text-align: center;
+  }
+  
+  .street-loader__runner {
+    position: relative;
+    height: 80px;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+  
+  /* Runner container - moves across the bar */
+  .runner {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 60px;
+  }
+  
+  .street-loader--active .runner {
+    animation: runner-move 2s linear forwards;
+  }
+  
+  @keyframes runner-move {
+    0% { left: 0; }
+    100% { left: calc(100% - 40px); }
+  }
+  
+  /* Runner body parts */
+  .runner__body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .runner__head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+  }
+  
+  .runner__torso {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 20px;
+    background: #fff;
+    border-radius: 2px;
+  }
+  
+  .runner__arm {
+    position: absolute;
+    top: 16px;
+    width: 4px;
+    height: 16px;
+    background: #fff;
+    border-radius: 2px;
+    transform-origin: top center;
+  }
+  
+  .runner__arm--left {
+    left: calc(50% - 6px);
+  }
+  
+  .runner__arm--right {
+    left: calc(50% + 2px);
+  }
+  
+  .runner__leg {
+    position: absolute;
+    top: 32px;
+    width: 4px;
+    height: 22px;
+    background: #fff;
+    border-radius: 2px;
+    transform-origin: top center;
+  }
+  
+  .runner__leg--left {
+    left: calc(50% - 5px);
+  }
+  
+  .runner__leg--right {
+    left: calc(50% + 1px);
+  }
+  
+  /* Smooth running animation for limbs */
+  .street-loader--active .runner__arm--left {
+    animation: arm-swing-left 0.4s ease-in-out infinite;
+  }
+  
+  .street-loader--active .runner__arm--right {
+    animation: arm-swing-right 0.4s ease-in-out infinite;
+  }
+  
+  .street-loader--active .runner__leg--left {
+    animation: leg-swing-left 0.4s ease-in-out infinite;
+  }
+  
+  .street-loader--active .runner__leg--right {
+    animation: leg-swing-right 0.4s ease-in-out infinite;
+  }
+  
+  @keyframes arm-swing-left {
+    0%, 100% { transform: rotate(40deg); }
+    50% { transform: rotate(-40deg); }
+  }
+  
+  @keyframes arm-swing-right {
+    0%, 100% { transform: rotate(-40deg); }
+    50% { transform: rotate(40deg); }
+  }
+  
+  @keyframes leg-swing-left {
+    0%, 100% { transform: rotate(35deg); }
+    50% { transform: rotate(-35deg); }
+  }
+  
+  @keyframes leg-swing-right {
+    0%, 100% { transform: rotate(-35deg); }
+    50% { transform: rotate(35deg); }
+  }
+  
+  /* Slight body bob */
+  .street-loader--active .runner__body {
+    animation: body-bob 0.2s ease-in-out infinite;
+  }
+  
+  @keyframes body-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+  
+  .street-loader__track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  
+  .street-loader__bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
+    border-radius: 2px;
+  }
+  
+  .street-loader--active .street-loader__bar {
+    animation: bar-fill 2s ease-out forwards;
+  }
+  
+  @keyframes bar-fill {
+    0% { width: 0; }
+    100% { width: 100%; }
+  }
+  
+  .street-loader__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .street-loader__brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3em;
+  }
+  
+  .street-loader__tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.625rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+</style>
+
+<script>
+  // Street loader shows on FIRST switch from Studio to Street
+  window.showStreetLoader = function() {
+    if (sessionStorage.getItem('street-loader-shown')) {
+      return;
+    }
+    
+    const loader = document.getElementById('streetLoader');
+    if (!loader) return;
+    
+    sessionStorage.setItem('street-loader-shown', 'true');
+    
+    loader.classList.remove('street-loader--hidden');
+    loader.classList.add('street-loader--active');
+    
+    setTimeout(function() {
+      loader.classList.remove('street-loader--active');
+      loader.classList.add('street-loader--hidden');
+    }, 2200);
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Street Loader",
+  "settings": []
+}
+{% endschema %}

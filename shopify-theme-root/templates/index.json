@@ -1,0 +1,19 @@
+{
+    "sections": {
+        "hero": {
+            "type": "hero",
+            "settings": {
+                "heading": "RETITLED",
+                "subheading": "RETITLE YOUR LOOK"
+            }
+        },
+        "scroll-feed": {
+            "type": "scroll-feed",
+            "settings": {}
+        }
+    },
+    "order": [
+        "hero",
+        "scroll-feed"
+    ]
+}

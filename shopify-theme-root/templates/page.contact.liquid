@@ -1,0 +1,179 @@
+<!-- Contact Page Template -->
+<div class="page-section contact-page">
+  <div class="page-content">
+    <header class="page-header">
+      <p class="page-header__tagline">Get in Touch</p>
+      <h1 class="page-header__title">CONTACT</h1>
+      <p class="page-header__subtitle">Questions? Collaborations? We'd love to hear from you.</p>
+    </header>
+    
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3 class="contact-item__title">General Inquiries</h3>
+          <a href="mailto:hello@retitled.com" class="contact-item__link">hello@retitled.com</a>
+        </div>
+        <div class="contact-item">
+          <h3 class="contact-item__title">Press & Collaborations</h3>
+          <a href="mailto:press@retitled.com" class="contact-item__link">press@retitled.com</a>
+        </div>
+        <div class="contact-item">
+          <h3 class="contact-item__title">Customer Support</h3>
+          <a href="mailto:support@retitled.com" class="contact-item__link">support@retitled.com</a>
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+      
+      <div class="contact-social">
+        <p class="contact-social__label">Follow Us</p>
+        <div class="contact-social__links">
+          <a href="https://instagram.com/retitled" target="_blank" rel="noopener" class="contact-social__link">Instagram</a>
+          <a href="https://tiktok.com/@retitled" target="_blank" rel="noopener" class="contact-social__link">TikTok</a>
+          <a href="https://twitter.com/retitled" target="_blank" rel="noopener" class="contact-social__link">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .contact-page {
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    background: var(--background);
+  }
+  
+  .contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+  
+  .contact-item__title {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--foreground);
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+  }
+  
+  .contact-item__link {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--foreground);
+    text-decoration: none;
+    border-bottom: 1px solid var(--foreground);
+    transition: opacity 0.3s ease;
+  }
+  
+  .contact-item__link:hover {
+    opacity: 0.7;
+  }
+  
+  .contact-form {
+    margin-bottom: 4rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--foreground);
+    background: transparent;
+    border: 1px solid var(--foreground);
+    border-opacity: 0.2;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  
+  .contact-social {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  [data-theme="dark"] .contact-social {
+    border-color: rgba(255,255,255,0.1);
+  }
+  
+  .contact-social__label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--foreground);
+    opacity: 0.5;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-social__links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .contact-social__link {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-social__link:hover {
+    color: var(--accent);
+  }
+  
+  @media (max-width: 768px) {
+    .contact-info {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

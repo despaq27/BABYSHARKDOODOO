@@ -1,0 +1,468 @@
+<!-- Scroll Feed Section - Separated by Theme -->
+<!-- 
+  HOW TO ADD PRODUCTS TO THE SCROLL:
+  ===================================
+  1. In Shopify Admin, go to Products → Collections
+  2. Create two collections:
+     - "Street" (handle: street) - for Street theme products
+     - "Studio" (handle: studio) - for Studio theme products
+  3. Add your products to the appropriate collection
+  4. Products will automatically appear in the scroll feed for their theme
+-->
+
+<!-- STREET FEED - Shows when Street theme is active -->
+<section class="scroll-feed scroll-feed--street no-scrollbar" id="scrollFeedStreet">
+  
+  <!-- Demo Street Cards (fallback when no products exist) -->
+  <div class="feed-card feed-card--street-demo" data-index="0" data-type="product">
+    <div class="feed-card__image">
+      <img src="{{ 'vibe-urban.png' | asset_url }}" alt="Night City Vibes">
+    </div>
+    <div class="feed-card__gradient"></div>
+    <div class="feed-card__swipe-hint">Swipe → Add to Cart</div>
+    
+    <div class="feed-card__product-tag">
+      <img src="{{ 'charcoal-hoodie.png' | asset_url }}" alt="Charcoal Hoodie" class="feed-card__product-thumb">
+      <div class="feed-card__product-info">
+        <span class="feed-card__product-name">HEAVYWEIGHT HOODIE</span>
+        <span class="feed-card__product-price">$89</span>
+      </div>
+    </div>
+    
+    <div class="feed-card__content">
+      <p class="feed-card__author">@cyber_junkie</p>
+      <h2 class="feed-card__title">Night City Vibes</h2>
+      <p class="feed-card__desc">LA Apparel blanks • 14oz cotton • Built for the streets</p>
+      <div class="feed-card__actions">
+        <button class="feed-card__btn feed-card__btn--primary" onclick="addDemoItem('charcoal-hoodie', 'Heavyweight Hoodie', 89)">
+          Add to Cart
+        </button>
+        <button class="feed-card__btn" onclick="showQuickView(this)">
+          Quick Look
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="feed-card feed-card--street-demo" data-index="1" data-type="trip">
+    <div class="feed-card__image">
+      <img src="{{ 'trip-chrome.png' | asset_url }}" alt="Liquid Chrome Dreams">
+    </div>
+    <div class="feed-card__gradient"></div>
+    
+    <div class="feed-card__content feed-card__content--trip">
+      <p class="feed-card__artist">VISUAL BY AI_GOD</p>
+      <h2 class="feed-card__title feed-card__title--trip">Liquid Chrome Dreams</h2>
+      <p class="feed-card__desc">Generative art • Limited drop incoming</p>
+    </div>
+  </div>
+
+  <div class="feed-card feed-card--street-demo" data-index="2" data-type="product">
+    <div class="feed-card__image">
+      <img src="{{ 'vibe-urban.png' | asset_url }}" alt="Subway Surfer">
+    </div>
+    <div class="feed-card__gradient"></div>
+    <div class="feed-card__swipe-hint">Swipe → Add to Cart</div>
+    
+    <div class="feed-card__product-tag">
+      <img src="{{ 'product-hoodie.png' | asset_url }}" alt="Street Hoodie" class="feed-card__product-thumb">
+      <div class="feed-card__product-info">
+        <span class="feed-card__product-name">STREET ESSENTIAL</span>
+        <span class="feed-card__product-price">$79</span>
+      </div>
+    </div>
+    
+    <div class="feed-card__content">
+      <p class="feed-card__author">@skate_rat</p>
+      <h2 class="feed-card__title">Subway Surfer</h2>
+      <p class="feed-card__desc">Oversized fit • Dropped shoulders • Custom tags</p>
+      <div class="feed-card__actions">
+        <button class="feed-card__btn feed-card__btn--primary" onclick="addDemoItem('street-hoodie', 'Street Essential', 79)">
+          Add to Cart
+        </button>
+        <button class="feed-card__btn" onclick="showQuickView(this)">
+          Quick Look
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real Street Products from Shopify "street" collection -->
+  {% for product in collections.street.products limit: 10 %}
+    <div class="feed-card feed-card--street-product" data-index="{{ forloop.index | plus: 2 }}" data-type="product">
+      <div class="feed-card__image">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | img_url: '1080x1920', crop: 'center' }}" alt="{{ product.title }}">
+        {% else %}
+          <img src="{{ 'vibe-urban.png' | asset_url }}" alt="{{ product.title }}">
+        {% endif %}
+      </div>
+      <div class="feed-card__gradient"></div>
+      <div class="feed-card__swipe-hint">Swipe → Add to Cart</div>
+      <div class="feed-card__content">
+        <h2 class="feed-card__title">{{ product.title | upcase }}</h2>
+        <p class="feed-card__price">{{ product.price | money }}</p>
+        <div class="feed-card__actions">
+          <button class="feed-card__btn feed-card__btn--primary" onclick="addToCart('{{ product.variants.first.id }}')">
+            Add to Cart
+          </button>
+          <a href="{{ product.url }}" class="feed-card__btn">View</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<!-- STUDIO FEED - Shows when Studio theme is active -->
+<section class="scroll-feed scroll-feed--studio no-scrollbar" id="scrollFeedStudio">
+  
+  <!-- Demo Studio Cards (fallback when no products exist) -->
+  <div class="feed-card feed-card--studio-demo" data-index="0" data-type="vibe">
+    <div class="feed-card__image">
+      <img src="{{ 'studio_v2_1_night_out_flash_1765015704274.png' | asset_url }}" alt="Girls Night Out">
+    </div>
+    <div class="feed-card__gradient feed-card__gradient--light"></div>
+    
+    <div class="feed-card__content feed-card__content--studio">
+      <p class="feed-card__author">@studio_diary</p>
+      <h2 class="feed-card__title">Girls Night Out</h2>
+      <p class="feed-card__desc">Flash photography • Y2K vibes • Main character energy</p>
+    </div>
+  </div>
+
+  <div class="feed-card feed-card--studio-demo" data-index="1" data-type="vibe">
+    <div class="feed-card__image">
+      <img src="{{ 'studio_v2_2_park_cozy_1765015718679.png' | asset_url }}" alt="Golden Hour">
+    </div>
+    <div class="feed-card__gradient feed-card__gradient--light"></div>
+    
+    <div class="feed-card__content feed-card__content--studio">
+      <p class="feed-card__author">@sun_chaser</p>
+      <h2 class="feed-card__title">Golden Hour</h2>
+      <p class="feed-card__desc">Soft girl aesthetic • Dreamy edits • Cozy fits</p>
+    </div>
+  </div>
+
+  <!-- Real Studio Products from Shopify "studio" collection -->
+  {% for product in collections.studio.products limit: 10 %}
+    <div class="feed-card feed-card--studio-product" data-index="{{ forloop.index | plus: 1 }}" data-type="product">
+      <div class="feed-card__image">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | img_url: '1080x1920', crop: 'center' }}" alt="{{ product.title }}">
+        {% else %}
+          <img src="{{ 'studio_v2_1_night_out_flash_1765015704274.png' | asset_url }}" alt="{{ product.title }}">
+        {% endif %}
+      </div>
+      <div class="feed-card__gradient feed-card__gradient--light"></div>
+      <div class="feed-card__swipe-hint">Swipe → Add to Cart</div>
+      <div class="feed-card__content feed-card__content--studio">
+        <h2 class="feed-card__title">{{ product.title | upcase }}</h2>
+        <p class="feed-card__price feed-card__price--studio">{{ product.price | money }}</p>
+        <div class="feed-card__actions">
+          <button class="feed-card__btn feed-card__btn--studio" onclick="addToCart('{{ product.variants.first.id }}')">
+            Add to Cart
+          </button>
+          <a href="{{ product.url }}" class="feed-card__btn feed-card__btn--studio-outline">View</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<style>
+  /* Feed visibility based on theme */
+  .scroll-feed--street {
+    display: none;
+  }
+  
+  .scroll-feed--studio {
+    display: block;
+  }
+  
+  [data-theme="dark"] .scroll-feed--street {
+    display: block;
+  }
+  
+  [data-theme="dark"] .scroll-feed--studio {
+    display: none;
+  }
+
+  /* Product Tag Styles */
+  .feed-card__product-tag {
+    position: absolute;
+    top: 5rem;
+    left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem;
+    padding-right: 1rem;
+    border-radius: 50px;
+    z-index: 20;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .feed-card__product-tag:hover {
+    background: rgba(0,0,0,0.9);
+    transform: scale(1.05);
+  }
+  
+  .feed-card__product-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+  }
+  
+  .feed-card__product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+  
+  .feed-card__product-name {
+    font-family: var(--font-display);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fff;
+  }
+  
+  .feed-card__product-price {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: #4ade80;
+  }
+  
+  /* Author/Artist styles */
+  .feed-card__author,
+  .feed-card__artist {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.5rem;
+  }
+  
+  .feed-card__desc {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+  }
+  
+  /* Trip card special styles */
+  .feed-card__content--trip {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    padding: 2rem;
+  }
+  
+  .feed-card__title--trip {
+    font-size: 3rem;
+    text-shadow: 0 0 60px rgba(139, 92, 246, 0.8);
+  }
+  
+  /* Studio card styles */
+  .feed-card__gradient--light {
+    background: linear-gradient(to top, rgba(250,250,250,0.95) 0%, rgba(250,250,250,0.4) 30%, transparent 60%);
+  }
+  
+  .feed-card__content--studio {
+    color: #1A1A1A;
+  }
+  
+  .feed-card__content--studio .feed-card__author {
+    color: rgba(26,26,26,0.5);
+  }
+  
+  .feed-card__content--studio .feed-card__desc {
+    color: rgba(26,26,26,0.6);
+  }
+  
+  .feed-card__price--studio {
+    color: #E91E63;
+  }
+  
+  .feed-card__btn--studio {
+    background: #1A1A1A;
+    color: #fff;
+    border-color: #1A1A1A;
+  }
+  
+  .feed-card__btn--studio:hover {
+    background: transparent;
+    color: #1A1A1A;
+  }
+  
+  .feed-card__btn--studio-outline {
+    background: transparent;
+    color: #1A1A1A;
+    border-color: #1A1A1A;
+  }
+  
+  .feed-card__btn--studio-outline:hover {
+    background: #1A1A1A;
+    color: #fff;
+  }
+</style>
+
+<script>
+  // Demo cart function (for items without Shopify product IDs)
+  function addDemoItem(id, name, price) {
+    console.log('Adding demo item:', name, price);
+    showCartFeedback();
+    if (navigator.vibrate) navigator.vibrate(200);
+  }
+
+  // Real Shopify cart function
+  function addToCart(variantId) {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: variantId, quantity: 1 })
+    })
+    .then(response => response.json())
+    .then(data => {
+      showCartFeedback();
+      if (navigator.vibrate) navigator.vibrate(200);
+    })
+    .catch(error => console.error('Error:', error));
+  }
+
+  // Cart feedback popup
+  function showCartFeedback() {
+    const feedback = document.createElement('div');
+    const isStudio = document.documentElement.dataset.theme === 'light';
+    feedback.style.cssText = `
+      position: fixed;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%) skewX(-10deg);
+      background: ${isStudio ? '#E91E63' : '#4ade80'};
+      color: ${isStudio ? '#fff' : '#000'};
+      padding: 1rem 2rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 9999px;
+      z-index: 100;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease-out;
+    `;
+    feedback.textContent = isStudio ? 'Added! 💕' : 'CHA-CHING! 💸';
+    document.body.appendChild(feedback);
+    
+    setTimeout(() => {
+      feedback.style.animation = 'slideOut 0.3s ease-in forwards';
+      setTimeout(() => feedback.remove(), 300);
+    }, 2000);
+  }
+
+  // Quick view modal
+  function showQuickView(btn) {
+    const card = btn.closest('.feed-card');
+    const title = card.querySelector('.feed-card__title')?.textContent || 'Product';
+    const price = card.querySelector('.feed-card__product-price')?.textContent || '$89';
+    const isStudio = document.documentElement.dataset.theme === 'light';
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.3s ease;
+    `;
+    modal.innerHTML = `
+      <div style="background: ${isStudio ? '#FAFAFA' : '#1a1a1a'}; padding: 2rem; border-radius: 1rem; max-width: 400px; border: 1px solid ${isStudio ? '#eee' : 'rgba(255,255,255,0.1)'};">
+        <h2 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; color: ${isStudio ? '#1A1A1A' : '#fff'};">${title}</h2>
+        <p style="font-family: var(--font-display); color: ${isStudio ? '#E91E63' : '#4ade80'}; font-size: 1.25rem; margin-bottom: 1rem;">${price}</p>
+        <p style="color: ${isStudio ? 'rgba(26,26,26,0.6)' : 'rgba(255,255,255,0.6)'}; font-size: 0.875rem; margin-bottom: 1.5rem;">
+          Size: S / M / L / XL<br>
+          Material: ${isStudio ? 'Premium Cotton Blend' : '14oz Heavyweight Cotton'}<br>
+          Fit: ${isStudio ? 'Relaxed Feminine' : 'Oversized Boxy'}
+        </p>
+        <button onclick="this.closest('div').parentElement.remove()" style="width: 100%; padding: 1rem; background: ${isStudio ? '#1A1A1A' : '#fff'}; color: ${isStudio ? '#fff' : '#000'}; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; border: none; cursor: pointer;">
+          Close
+        </button>
+      </div>
+    `;
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    document.body.appendChild(modal);
+  }
+
+  // Double-tap for wishlist (heart animation)
+  let lastTap = 0;
+  document.querySelectorAll('.feed-card').forEach(card => {
+    card.addEventListener('touchend', (e) => {
+      const currentTime = new Date().getTime();
+      const tapLength = currentTime - lastTap;
+      if (tapLength < 300 && tapLength > 0) {
+        showHeartAnimation(card);
+        if (navigator.vibrate) navigator.vibrate([50, 50]);
+      }
+      lastTap = currentTime;
+    });
+    
+    card.addEventListener('dblclick', () => {
+      showHeartAnimation(card);
+    });
+  });
+
+  function showHeartAnimation(card) {
+    const heart = document.createElement('div');
+    heart.className = 'heart-animation';
+    heart.textContent = '❤️';
+    card.appendChild(heart);
+    setTimeout(() => heart.remove(), 1200);
+  }
+
+  // Add CSS animations
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateY(-50%) translateX(100px) skewX(-10deg); opacity: 0; }
+      to { transform: translateY(-50%) translateX(0) skewX(-10deg); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateY(-50%) translateX(0) skewX(-10deg); opacity: 1; }
+      to { transform: translateY(-50%) translateX(100px) skewX(-10deg); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+{% schema %}
+{
+  "name": "Scroll Feed",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Scroll Feed"
+    }
+  ]
+}
+{% endschema %}
